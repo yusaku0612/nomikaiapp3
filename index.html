@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - 飲み会アプリZ</title>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.css'>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@mdi/font@5.9.55/css/materialdesignicons.min.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="app">
+  <div class="container">
+    <h1>飲み会計算アプリ</h1>
+    <div class="form-card">
+      <!-- タブナビゲーション -->
+      <div class="tab-navigation">
+        <div :class="['tab', { active: activeTab === 'register' }]" @click="activeTab = 'register'">
+          イベント登録
+        </div>
+        <div :class="['tab', { active: activeTab === 'search' }]" @click="activeTab = 'search'">
+          イベント検索
+        </div>
+      </div>
+
+      <!-- イベント登録フォーム -->
+      <div v-if="activeTab === 'register'">
+        <form @submit.prevent="saveNomikaiEvent">
+          <div class="form-group">
+            <label for="totalAmount">合計金額:</label>
+            <input v-model="totalAmount" type="number" id="totalAmount" step="100" required>
+          </div>
+
+          <div class="form-group">
+            <label for="eventName">イベント名:</label>
+            <input v-model="eventName" type="text" id="eventName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="eventDate">イベント日付:</label>
+            <input v-model="eventDate" type="date" id="eventDate" required>
+          </div>
+
+          <div class="form-group">
+            <label for="participants">参加者 (カンマ区切り):</label>
+            <input v-model="participants" type="text" id="participants" required>
+          </div>
+
+          <div class="form-group">
+            <label for="paymentFlag">支払い済み:</label>
+            <input v-model="paymentFlag" type="checkbox" id="paymentFlag">
+          </div>
+
+          <div class="form-buttons">
+            <button type="submit" class="btn btn-primary">イベントを保存</button>
+          </div>
+        </form>
+
+        <!-- 計算結果 -->
+        <div v-if="calculationResult" class="result-card">
+          <h2>計算結果</h2>
+          <p>一人当たりの金額: {{ calculationResult }} 円</p>
+        </div>
+      </div>
+
+      <!-- イベント検索フォーム -->
+      <div v-if="activeTab === 'search'">
+        <div class="form-group">
+          <label for="searchType">検索条件を選択:</label>
+          <select v-model="searchType" id="searchType">
+            <option value="date">日付で検索</option>
+            <option value="eventName">イベント名で検索</option>
+            <option value="name">名前で検索</option>
+          </select>
+        </div>
+
+        <!-- 検索フィールド -->
+        <div v-if="searchType === 'date'" class="form-group">
+          <label for="searchDate">日付:</label>
+          <input v-model="searchDate" type="date" id="searchDate" required>
+        </div>
+
+        <div v-if="searchType === 'eventName'" class="form-group">
+          <label for="searchEventName">イベント名:</label>
+          <input v-model="searchEventName" type="text" id="searchEventName" required>
+        </div>
+
+        <div v-if="searchType === 'name'" class="form-group">
+          <label for="searchName">名前:</label>
+          <input v-model="searchName" type="text" id="searchName" required>
+        </div>
+
+        <div class="form-buttons">
+          <button @click="searchNomikaiEvent" class="btn btn-primary">検索</button>
+        </div>
+
+        <!-- 検索結果 -->
+        <div v-if="searchResults.length" class="result-card">
+          <h2>検索結果</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>日付</th>
+                <th>イベント名</th>
+                <th>参加者</th>
+                <th>金額</th>
+                <th>支払い済み</th>
+                <th>更新</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="result in searchResults" :key="result.id">
+                <td>{{ formatDate(result.eventDate) }}</td> <!-- 日付を整形 -->
+                <td>{{ result.eventName }}</td>
+                <td>{{ result.participants }}</td>
+                <td>{{ result.amount }}</td>
+                <td>{{ result.paymentFlag ? 'はい' : 'いいえ' }}</td>
+                <td><input type="checkbox" v-model="result.paymentFlag"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="form-buttons">
+            <button @click="updatePaymentFlags" class="btn btn-primary">支払いフラグを更新</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/vuetify@2.5.10/dist/vuetify.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>

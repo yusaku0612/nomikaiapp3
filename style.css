@@ -1,0 +1,248 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 50px; /* タイトルとフォームの間の余白を広くする */
+}
+
+.form-card, .result-card, .event-history-card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  position: relative; /* タブを絶対位置で配置するために必要 */
+}
+
+.form-card {
+  margin-bottom: 20px;
+  padding-top: 60px; /* タブの分のスペースを確保 */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #495057;
+}
+
+input[type="text"], input[type="number"], input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 5px;
+  justify-content: flex-start;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.result-card {
+  text-align: center;
+}
+
+.event-history-card {
+  margin-top: 20px;
+}
+
+.search-card {
+  margin-bottom: 20px;
+}
+
+.search-card label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #495057;
+}
+
+.search-card input[type="text"] {
+  width: 100%;
+}
+
+.event-item {
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+/* プルダウンメニューと検索部分を一行に配置 */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* プルダウンメニューのスタイル */
+select {
+  width: 150px; /* プルダウンメニューを小さめに */
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  appearance: none;
+  background-color: #ffffff;
+}
+
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+/* 入力バーのスタイル */
+input[type="text"] {
+  flex-grow: 1; /* 入力バーを大きめに */
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+/* 検索ボタンのスタイル */
+.search-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+/* タブナビゲーションのスタイル */
+.tab-navigation {
+  position: absolute;
+  top: -40px; /* タイトル下に配置 */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab-navigation .tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #495057;
+  border-radius: 4px 4px 0 0;
+  margin: 0 10px;
+}
+
+.tab-navigation .tab.active {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.tab-navigation .tab:hover {
+  background-color: #0056b3;
+  color: #ffffff;
+}
+
+/* テーブルのスタイル */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th, .table td {
+  padding: 12px 15px;
+  border: 1px solid #dee2e6;
+  text-align: left;
+}
+
+.table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.table td {
+  background-color: #f8f9fa;
+}
+
+@media (max-width: 600px) {
+  .form-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .tab-navigation {
+    flex-direction: column;
+  }
+
+  .tab-navigation .tab {
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+  }
+}
